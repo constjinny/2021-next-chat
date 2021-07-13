@@ -3,15 +3,24 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import colors from "../../constant/color";
 
-export interface AvatarProps {
+export interface IAvatarProps {
   hideLine: boolean;
   isFriend: boolean;
   url?: { src: string; height: number; width: number; blurDataURL?: string };
 }
 
-export function Avatar({ hideLine, isFriend, url }: AvatarProps): ReactElement {
-  const borderColor = hideLine ? "#e4e4e4" : isFriend ? "#00C7B8" : "#4261e6";
+export function Avatar({
+  hideLine,
+  isFriend,
+  url,
+}: IAvatarProps): ReactElement {
+  const borderColor = hideLine
+    ? colors.lightPurple
+    : isFriend
+    ? colors.mint
+    : colors.darkPurple;
   const userIcon = <FontAwesomeIcon icon={faUser} />;
 
   return (
@@ -37,7 +46,7 @@ const AvatarStyle = styled.div<{ borderColor: string }>`
   height: 50px;
   border-radius: 50%;
   border: 2px solid ${({ borderColor }) => borderColor};
-  background-color: #fff;
+  background-color: ${colors.white};
   box-sizing: border-box;
 `;
 
@@ -47,9 +56,9 @@ const AvararEmpyStyle = styled.span`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #d9d9d9;
+  background-color: ${colors.lightGray};
   svg {
     font-size: 24px;
-    color: #fff;
+    color: ${colors.white};
   }
 `;

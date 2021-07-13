@@ -1,6 +1,7 @@
 import { ReactElement, useCallback, useEffect } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
+import { chatAPI } from "../../api/api.sample";
 import dummyData from "../../data/data.sample"; // TODO: 제거
 
 import { RoomTop } from "./RoomTop";
@@ -8,7 +9,6 @@ import { ChatList } from "./ChatList";
 import { roomSelector, roomAction } from "./RoomSlice";
 import { roomListParser, roomDataParser, roomListAction } from "../RoomList";
 import { NoData } from "../../components/noData";
-import { chatAPI } from "../../api/api.sample";
 
 export function RoomPage(): ReactElement {
   const dispatch = Redux.useDispatch();

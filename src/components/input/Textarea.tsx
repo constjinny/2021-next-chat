@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
+import colors from "../../constant/color";
 
 import { Button } from "../button";
 
-export interface TextareaProps {
+export interface ITextareaProps {
   value: string;
   placeholder: string;
   onChange: (value: string) => any;
@@ -15,7 +16,7 @@ export function Textarea({
   placeholder,
   onChange,
   onSubmit,
-}: TextareaProps): ReactElement {
+}: ITextareaProps): ReactElement {
   const handleEnterKeyDown = (
     event: React.KeyboardEvent<HTMLTextAreaElement>
   ) => {
@@ -48,7 +49,7 @@ Textarea.defaultProps = {
 };
 
 const BoxStyle = styled.div`
-  border: 1px solid #999;
+  border: 1px solid ${colors.gray};
 `;
 
 const TextareaBoxStyle = styled.div`
@@ -67,8 +68,8 @@ const TextareaStyle = styled.textarea`
 const ButtonBoxStyle = styled.div`
   overflow: hidden;
   padding: 8px 10px;
-  background-color: #e4e4e4;
-  border-top: 1px solid #999;
+  background-color: ${colors.lightGray};
+  border-top: 1px solid ${colors.gray};
   > button {
     float: right;
   }

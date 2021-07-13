@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
 
-export interface InputProps {
+export interface IInputProps {
   id: string;
   type: string;
   value: string;
@@ -15,7 +15,7 @@ export function Input({
   value,
   placeholder,
   onChange,
-}: InputProps): ReactElement {
+}: IInputProps): ReactElement {
   return (
     <LabelStyle htmlFor={id}>
       <InputStyle

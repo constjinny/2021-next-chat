@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { chatAPI } from "../../api/api.sample";
 import { IChatItem } from "../../types";
 import dummyData from "../../data/data.sample"; // TODO: 제거
+import colors from "../../constant/color";
 
 import { roomSelector, roomAction } from "./RoomSlice";
 import { roomListAction, roomListParser, roomDataParser } from "../RoomList";
@@ -143,13 +144,13 @@ const TimeDataStyle = styled.div`
   margin: 10px 0 0 60px;
   font-size: 12px;
   span {
-    color: #ccc;
+    color: ${colors.lightGray};
   }
 `;
 
 const UnReadDataStyle = styled.span`
   margin-left: 5px;
-  color: #4261e6 !important;
+  color: ${colors.darkPurple} !important;
 `;
 
 const ChatInfoStyle = styled.div`
@@ -176,8 +177,8 @@ const DateLineStyle = styled.span`
     font-size: 12px;
     font-weight: 500;
     line-height: 15px;
-    background-color: #fff;
-    color: rgba(54, 58, 66, 0.4);
+    background-color: ${colors.white};
+    color: ${colors.black};
   }
   &:before {
     display: inline-block;
@@ -186,7 +187,7 @@ const DateLineStyle = styled.span`
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: #e6e6eb;
+    background-color: ${colors.lightGray};
     content: "";
   }
 `;

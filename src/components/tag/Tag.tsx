@@ -1,13 +1,14 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
+import colors from "../../constant/color";
 
-export interface TagProps {
+export interface ITagProps {
   margin?: string;
   isFriend: boolean;
 }
 
-export function Tag({ isFriend, margin }: TagProps): ReactElement {
-  const tagColor = isFriend ? "#00C7B8" : "#4261e6";
+export function Tag({ isFriend, margin }: ITagProps): ReactElement {
+  const tagColor = isFriend ? colors.mint : colors.darkPurple;
   const tagText = isFriend ? "친구" : "기업";
 
   return (
@@ -31,6 +32,6 @@ const TagStyle = styled.span<{
   font-size: 12px;
   border-radius: 15px;
   background-color: ${({ tagColor }) => tagColor};
-  color: #fff;
+  color: ${colors.white};
   vertical-align: top;
 `;

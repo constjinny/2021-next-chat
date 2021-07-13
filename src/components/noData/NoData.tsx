@@ -1,12 +1,13 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
+import colors from "../../constant/color";
 
-export interface NoDataProps {
+export interface INoDataProps {
   calc?: string;
   desc?: string;
 }
 
-export function NoData({ calc, desc }: NoDataProps): ReactElement {
+export function NoData({ calc, desc }: INoDataProps): ReactElement {
   const heightValue = calc ? `calc(100% - ${calc})` : "100%";
 
   return (
@@ -27,6 +28,6 @@ const NoDataStyle = styled.div<{ heightValue: string }>`
   justify-content: center;
   align-items: center;
   p {
-    color: #999;
+    color: ${colors.gray};
   }
 `;

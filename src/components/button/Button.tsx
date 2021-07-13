@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
-import { ButtonSizes, ButtonSizesStyle } from "./types";
+import colors from "../../constant/color";
 
-export interface ButtonProps {
+import { ButtonSizes, buttonSizesStyle } from "./types";
+
+export interface IButtonProps {
   children?: any;
   size: ButtonSizes | string;
   onClick: (any: any) => any;
@@ -14,8 +16,8 @@ export function Button({
   size,
   onClick,
   isDisabled,
-}: ButtonProps): ReactElement {
-  const getSizeStyle = ButtonSizesStyle[size];
+}: IButtonProps): ReactElement {
+  const getSizeStyle = buttonSizesStyle[size];
 
   return (
     <ButtonStyle
@@ -36,8 +38,8 @@ Button.defaultProps = {
 
 const ButtonStyle = styled.button<{ size: any }>`
   display: block;
-  background-color: #4261e6;
+  background-color: ${colors.darkPurple};
   border-radius: 20px;
-  color: #fff;
+  color: ${colors.white};
   ${({ size }) => size};
 `;

@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
+import colors from "../../constant/color";
 
 import { roomSelector } from "./RoomSlice";
 import { Tag } from "../../components/tag";
@@ -32,8 +33,8 @@ const TopWrapStyle = styled.div`
   align-items: center;
   height: 100px;
   padding: 0 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #cccccc;
+  background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.lightGray};
   &:before {
     position: absolute;
     top: 50%;
@@ -41,7 +42,7 @@ const TopWrapStyle = styled.div`
     width: 2px;
     height: 80px;
     margin-top: -40px;
-    background-color: #e6eaff;
+    background-color: ${colors.lightPurple};
     vertical-align: top;
     content: "";
   }
@@ -54,6 +55,6 @@ const RoomInfoStyle = styled.div`
   > span {
     display: block;
     margin-top: 5px;
-    color: #7991d2;
+    color: ${colors.purple};
   }
 `;

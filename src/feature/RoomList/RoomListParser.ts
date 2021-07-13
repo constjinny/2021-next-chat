@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import { isNull } from "lodash";
+import { friendAPI } from "../../api/api.sample";
 import { timeUtil, sortUtil } from "../../utils";
 import { IMemberAPI, IChatListAPI, IChatAPI } from "../../types";
-import { friendAPI } from "../../api/api.sample";
 
 // NOTI:
 // 기능: API 데이터 재 가공 -> roomList reducer

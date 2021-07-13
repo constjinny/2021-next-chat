@@ -45,8 +45,6 @@ export interface IChatRoom {
   chatData: IChatItem[] | [];
 }
 
-export interface IChatRoomState {
+export interface IChatRoomState extends IChatRoom {
   hasRoomData: boolean;
-  roomInfo: IRoomInfo | null;
-  chatData: IChatItem[] | [];
 }

@@ -5,7 +5,7 @@ export enum ButtonSizes {
   H30 = "height30",
 }
 
-export const ButtonSizesStyle: { [index: string]: any } = {
+export const buttonSizesStyle: { [index: string]: any } = {
   [ButtonSizes.H38]: css`
     padding: 0 14px;
     line-height: 38px;

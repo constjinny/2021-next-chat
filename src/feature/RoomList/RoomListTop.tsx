@@ -9,11 +9,12 @@ import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import { chatAPI } from "../../api/api.sample";
 import dummyData from "../../data/data.sample";
+import colors from "../../constant/color";
 
 import { roomListParser } from "./RoomListParser";
 import { roomListAction, roomListSelector } from "./RoomListSlice";
-import { Button, ButtonSizes } from "../../components/button";
 import { SearchInput } from "../../components/input";
+import { Button, ButtonSizes } from "../../components/button";
 
 export function RoomListTop(): ReactElement {
   const dispatch = Redux.useDispatch();
@@ -68,8 +69,8 @@ const TopWrapStyle = styled.div`
   align-items: center;
   height: 100px;
   padding: 0 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #cccccc;
+  background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.lightGray};
 `;
 
 const SearchWrapStyle = styled.div`
@@ -78,6 +79,6 @@ const SearchWrapStyle = styled.div`
   align-items: center;
   height: 70px;
   padding: 0 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #cccccc;
+  background-color: ${colors.white};
+  border-bottom: 1px solid ${colors.lightGray};
 `;

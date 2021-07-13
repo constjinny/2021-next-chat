@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import type { AppProps } from "next/app";
 import { wrapper } from "../src/store";
+import styled from "@emotion/styled";
 import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {

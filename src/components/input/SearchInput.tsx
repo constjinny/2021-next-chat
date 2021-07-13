@@ -2,8 +2,9 @@ import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import colors from "../../constant/color";
 
-export interface SearchInputProps {
+export interface ISearchInputProps {
   value: string;
   placeholder: string;
   onChange: (value: string) => any;
@@ -13,7 +14,7 @@ export function SearchInput({
   value,
   placeholder,
   onChange,
-}: SearchInputProps): ReactElement {
+}: ISearchInputProps): ReactElement {
   const searchIcon = <FontAwesomeIcon icon={faSearch} />;
 
   return (
@@ -39,11 +40,11 @@ const LabelStyle = styled.label`
   display: flex;
   width: 100%;
   padding: 10px 20px;
-  border: 1px solid #aaa;
+  border: 1px solid ${colors.gray};
   border-radius: 30px;
   svg {
     font-size: 18px;
-    color: #aaa;
+    color: ${colors.gray};
     margin-top: 1px;
   }
 `;
