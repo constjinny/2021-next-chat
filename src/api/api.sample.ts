@@ -83,8 +83,12 @@ const addRoomNewChat = (roomId: string, newChat: string) => {
       }
     });
 
+    const resultData = updateData.filter(
+      (roomData: IChatAPI) => roomData.room_id === roomId
+    );
+
     sessionStorage.setItem(keyType.chat, JSON.stringify(updateData));
-    return updateData[0];
+    return resultData[0];
   }
   return null;
 };
