@@ -36,5 +36,4 @@ const LeftLayout = styled.div`
 const RightLayout = styled.div`
   overflow: hidden;
   flex: 1.5;
-  background-color: pink;
 `;

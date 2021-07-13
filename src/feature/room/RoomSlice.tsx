@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { rootState } from "../../store";
-import { IChatRoomState } from "../../types";
+import { IChatRoomState, IChatRoom } from "../../types";
 
 const initialRoomState: IChatRoomState = {
+  hasRoomData: false,
   roomInfo: null,
   chatData: [],
 };
@@ -11,24 +12,25 @@ export const roomSlice = createSlice({
   name: "roomSlice",
   initialState: initialRoomState,
   reducers: {
-    // setChatDataId(state, action: PayloadAction<{ roomId: string }>) {
-    //   const { roomId } = action.payload;
-    //   const unReadRoom = data.filter(
-    //     (room: IRoomList) => room.unReadChatLength > 0
-    //   )?.length;
-    //   state.hasRoom = data.length > 0;
-    //   state.unReadRoom = unReadRoom || 0;
-    //   state.roomList = data;
-    //   state.onSearch = onSearch;
-    // },
+    setRoomData(state, action: PayloadAction<{ data: IChatRoom }>) {
+      const { data } = action.payload;
+
+      state.hasRoomData = true;
+      state.roomInfo = data.roomInfo;
+      state.chatData = data.chatData;
+    },
   },
 });
 
 export const roomAction = roomSlice.actions;
 export const roomReducer = roomSlice.reducer;
 
-const selectIsLoad = (state: rootState) => state.roomReducer.isLoaded;
+const selectHasRoomData = (state: rootState) => state.roomReducer.hasRoomData;
+const selectRoomInfo = (state: rootState) => state.roomReducer.roomInfo;
+const selectChatData = (state: rootState) => state.roomReducer.chatData;
 
 export const roomSelector = {
-  selectIsLoad,
+  selectHasRoomData,
+  selectRoomInfo,
+  selectChatData,
 };

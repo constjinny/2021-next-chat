@@ -2,15 +2,26 @@ import { ReactElement, Fragment } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import { IRoomList } from "../../types";
+import { chatAPI } from "../../api/api.sample";
+import dummyData from "../../data/data.sample"; // TODO: 제거
 
+import { roomDataParser } from "./RoomListParser";
 import { roomListSelector } from "./RoomListSlice";
+import { roomAction } from "../room";
 import { Avatar } from "../../components/avatar";
 
 export function RoomList(): ReactElement {
+  const dispatch = Redux.useDispatch();
   const roomList = Redux.useSelector(roomListSelector.selectRoomListData);
 
+  // NOTI: 선택한 채팅방 데이터 조회
   const handleShowChat = (roomId: string) => {
-    console.log(roomId);
+    const data = chatAPI.getRoomData(roomId);
+    if (data) {
+      const pasedData = roomDataParser(dummyData.authUser.id, data);
+
+      dispatch(roomAction.setRoomData({ data: pasedData }));
+    }
   };
 
   return (
@@ -20,8 +31,6 @@ export function RoomList(): ReactElement {
         const roomNameText = unRead
           ? `${room.roomName}(${room.unReadChatLength})`
           : room.roomName;
-
-        console.log(room);
 
         return (
           <RoomItemStyle
@@ -58,7 +67,7 @@ const RoomItemStyle = styled.div<{ isOn: boolean }>`
     background-color: #eff2f7;
   }
   > div:first-of-type {
-    flex: 0 0 54px;
+    flex: 0 0 50px;
   }
 `;
 
@@ -67,7 +76,7 @@ const RoomItemInfoStyle = styled.div`
   flex: 1;
   position: relative;
   margin-left: 10px;
-  padding-bottom: 31px;
+  padding-bottom: 25px;
 `;
 
 const RoomItemNameStyle = styled.strong<{ isBold: boolean }>`

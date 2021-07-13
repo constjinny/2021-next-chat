@@ -69,7 +69,7 @@ const TopWrapStyle = styled.div`
   height: 100px;
   padding: 0 20px;
   background-color: #fff;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #cccccc;
 `;
 
 const SearchWrapStyle = styled.div`
@@ -79,5 +79,5 @@ const SearchWrapStyle = styled.div`
   height: 70px;
   padding: 0 20px;
   background-color: #fff;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #cccccc;
 `;

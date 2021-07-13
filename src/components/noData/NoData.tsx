@@ -26,4 +26,7 @@ const NoDataStyle = styled.div<{ heightValue: string }>`
   height: ${({ heightValue }) => heightValue};
   justify-content: center;
   align-items: center;
+  p {
+    color: #999;
+  }
 `;

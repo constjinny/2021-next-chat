@@ -6,8 +6,14 @@ export interface IChatItemStyle {
 export interface IRoomInfo {
   roomId: string;
   roomName: string;
+  roomImg: {
+    src: string;
+    height: number;
+    width: number;
+    blurDataURL?: string;
+  };
   isFriend: boolean;
-  job: string;
+  roomJob: string;
 }
 
 export interface IChatUser {
@@ -33,7 +39,13 @@ export interface IChatItem {
   data: string;
 }
 
+export interface IChatRoom {
+  roomInfo: IRoomInfo | null;
+  chatData: IChatItem[] | [];
+}
+
 export interface IChatRoomState {
+  hasRoomData: boolean;
   roomInfo: IRoomInfo | null;
   chatData: IChatItem[] | [];
 }
