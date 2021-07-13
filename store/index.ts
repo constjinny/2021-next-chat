@@ -1,5 +1,4 @@
 import {
-  AnyAction,
   combineReducers,
   configureStore,
   getDefaultMiddleware,
@@ -7,6 +6,9 @@ import {
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import axios from "axios";
 import getConfig from "next/config";
+
+import { roomListReducer } from "../src/feature/RoomList";
+import { roomReducer } from "../src/feature/room";
 
 axios.defaults.baseURL = getConfig().publicRuntimeConfig.apiServerUrl;
 
@@ -18,7 +20,8 @@ export const reducer = (state: any, action: any) => {
     };
   }
   return combineReducers({
-    /* */
+    roomListReducer,
+    roomReducer,
   })(state, action);
 };
 

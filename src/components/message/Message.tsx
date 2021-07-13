@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
+
 import { Avatar } from "../avatar";
 
 export interface MessageProps {}

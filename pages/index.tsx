@@ -1,27 +1,23 @@
 import { useEffect } from "react";
-import Head from "next/head";
-import Image from "next/image";
 import styled from "@emotion/styled";
-import axios from "axios";
-import { RoomList } from "../src/feature/RoomList";
-import { ChatRoom } from "../src/feature/chatRoom";
-import { NoData } from "../src/components/noData";
+import { commAPI } from "../api/api.sample";
+
+import { RoomListPage } from "../src/feature/RoomList";
+import { RoomPage } from "../src/feature/room";
 
 export default function ChatApp() {
-  const data = false;
-
   useEffect(() => {
-    const data = axios.get("/api/getLoadData");
-    console.log("data", data);
+    // 서비스 최초 접속시 데이터 로드
+    commAPI.getLoadData();
   }, []);
 
   return (
     <ChatAppLayout>
       <LeftLayout>
-        <RoomList />
+        <RoomListPage />
       </LeftLayout>
       <RightLayout>
-        {data ? <ChatRoom /> : <NoData desc="선택한 대화가 없습니다." />}
+        <RoomPage />
       </RightLayout>
     </ChatAppLayout>
   );
