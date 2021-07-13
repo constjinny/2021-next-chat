@@ -1,14 +1,48 @@
-import { ReactElement } from "react";
+import { ReactElement, useCallback, useEffect } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
+import dummyData from "../../data/data.sample"; // TODO: 제거
 
 import { RoomTop } from "./RoomTop";
 import { ChatList } from "./ChatList";
-import { roomSelector } from "./RoomSlice";
+import { roomSelector, roomAction } from "./RoomSlice";
+import { roomListParser, roomDataParser, roomListAction } from "../RoomList";
 import { NoData } from "../../components/noData";
+import { chatAPI } from "../../api/api.sample";
 
 export function RoomPage(): ReactElement {
+  const dispatch = Redux.useDispatch();
   const hasRoomData = Redux.useSelector(roomSelector.selectRoomInfo);
+  const roomId = Redux.useSelector(roomSelector.selectRoomId);
+
+  const getRoomListData = useCallback(async () => {
+    const data = await chatAPI.getChatData();
+    if (data) {
+      const pasedData = roomListParser(dummyData.authUser.id, data);
+
+      dispatch(roomListAction.setRoomListData({ data: pasedData }));
+    }
+  }, [dispatch]);
+
+  const updatVisitTime = useCallback(async () => {
+    if (roomId) {
+      const data = await chatAPI.updateRoomVisitTime(roomId);
+      if (data) {
+        const pasedData = roomDataParser(dummyData.authUser.id, data);
+
+        getRoomListData();
+        dispatch(
+          roomAction.setRoomData({
+            data: pasedData,
+          })
+        );
+      }
+    }
+  }, [dispatch, roomId, getRoomListData]);
+
+  useEffect(() => {
+    updatVisitTime();
+  }, [updatVisitTime]);
 
   return (
     <RoomWrapStyle>

@@ -13,7 +13,7 @@ import { Textarea } from "../../components/input";
 export function ChatList(): ReactElement {
   const dispatch = Redux.useDispatch();
   const scrollTargetRef = useRef() as React.MutableRefObject<HTMLLIElement>;
-  const roomInfo = Redux.useSelector(roomSelector.selectRoomInfo);
+  const roomId = Redux.useSelector(roomSelector.selectRoomId);
   const chatData = Redux.useSelector(roomSelector.selectChatData);
   const [textValue, setTextValue] = useState("");
 
@@ -34,8 +34,8 @@ export function ChatList(): ReactElement {
   };
 
   const onSubmitNewChat = async () => {
-    if (roomInfo?.roomId && textValue) {
-      const data = await chatAPI.addRoomNewChat(roomInfo.roomId, textValue);
+    if (roomId && textValue) {
+      const data = await chatAPI.addRoomNewChat(roomId, textValue);
       if (data) {
         const pasedData = roomDataParser(dummyData.authUser.id, data);
 
@@ -58,6 +58,7 @@ export function ChatList(): ReactElement {
           const {
             user,
             isAuth,
+            isFriend,
             isDateGroup,
             isMinuteGroup,
             time,
@@ -79,7 +80,7 @@ export function ChatList(): ReactElement {
               )}
 
               <ChatInfoStyle>
-                <Avatar hideLine={true} url={avatarUrl} />
+                <Avatar hideLine={isAuth} isFriend={isFriend} url={avatarUrl} />
                 <strong>{nickName}</strong>
               </ChatInfoStyle>
 

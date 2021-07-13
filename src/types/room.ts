@@ -30,6 +30,7 @@ export interface IChatUser {
 export interface IChatItem {
   user: IChatUser;
   isAuth: boolean;
+  isFriend: boolean;
   isDateGroup: boolean;
   isMinuteGroup: boolean;
   time: number;

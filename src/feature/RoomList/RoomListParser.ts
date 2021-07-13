@@ -3,6 +3,7 @@ import weekday from "dayjs/plugin/weekday";
 import { isNull } from "lodash";
 import { timeUtil, sortUtil } from "../../utils";
 import { IMemberAPI, IChatListAPI, IChatAPI } from "../../types";
+import { friendAPI } from "../../api/api.sample";
 
 // NOTI:
 // 기능: API 데이터 재 가공 -> roomList reducer
@@ -66,6 +67,9 @@ export const roomDataParser = (
     const { user, time } = chat;
     const { id, nick_name: nickName, avatar_url: avatarUrl } = user;
 
+    const isAuth = user.id === authUserId;
+    const isFriend = isAuth ? false : friendAPI.findFriendId(user.id);
+
     const otherMembers = room_members.filter(
       (member: IMemberAPI) => member.id !== user.id
     );
@@ -91,7 +95,8 @@ export const roomDataParser = (
     return {
       ...chat,
       user: { id, nickName, avatarUrl },
-      isAuth: user.id === authUserId,
+      isAuth,
+      isFriend,
       isDateGroup: checkDateGroup || false,
       isMinuteGroup: checkMinutsGroup || false,
       time,

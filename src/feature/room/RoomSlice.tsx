@@ -27,10 +27,12 @@ export const roomReducer = roomSlice.reducer;
 
 const selectHasRoomData = (state: rootState) => state.roomReducer.hasRoomData;
 const selectRoomInfo = (state: rootState) => state.roomReducer.roomInfo;
+const selectRoomId = (state: rootState) => state.roomReducer.roomInfo?.roomId;
 const selectChatData = (state: rootState) => state.roomReducer.chatData;
 
 export const roomSelector = {
   selectHasRoomData,
   selectRoomInfo,
+  selectRoomId,
   selectChatData,
 };

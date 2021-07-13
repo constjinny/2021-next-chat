@@ -93,27 +93,30 @@ const chat = [
       is_friend: false,
     },
     room_members: [
-      { id: "roket", last_visit_time: LAST_VISIT },
+      {
+        id: "roket",
+        last_visit_time: dayjs(LAST_VISIT).subtract(80, "hour").valueOf(),
+      },
       {
         id: "user4",
-        last_visit_time: dayjs(LAST_VISIT).add(7250, "second").valueOf(),
+        last_visit_time: null,
       },
     ],
     chat_list: [
       {
         user: {
-          id: "user1",
-          nick_name: "최예슬",
-          avatar_url: avatar2,
+          id: "roket",
+          nick_name: "홍로켓",
+          avatar_url: avatar1,
         },
-        data: "안녕하세요. 로켓님.",
+        data: "안녕하세요. 펀치님.",
         time: dayjs(LAST_VISIT).subtract(81, "hour").valueOf(),
       },
       {
         user: {
-          id: "user1",
-          nick_name: "최예슬",
-          avatar_url: avatar2,
+          id: "roket",
+          nick_name: "홍로켓",
+          avatar_url: avatar1,
         },
         data: "디자이너 최예슬님을 소개 좀 부탁드리고 싶습니다.",
         time: dayjs(LAST_VISIT).subtract(80, "hour").valueOf(),
