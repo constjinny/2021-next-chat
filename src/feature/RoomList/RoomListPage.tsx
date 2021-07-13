@@ -31,7 +31,7 @@ export function RoomListPage(): ReactElement {
     <RoomListWrapStyle>
       <RoomListTop />
 
-      {hasRoom ? <RoomList /> : <NoData desc={nodataMsg} />}
+      {hasRoom ? <RoomList /> : <NoData calc={"172px"} desc={nodataMsg} />}
     </RoomListWrapStyle>
   );
 }

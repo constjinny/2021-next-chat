@@ -35,6 +35,8 @@ export function RoomListTop(): ReactElement {
     [dispatch]
   );
 
+  const handleCreateRoom = () => {};
+
   useEffect(() => {
     getSearchChatData(searchValue);
   }, [searchValue, getSearchChatData]);
@@ -44,7 +46,7 @@ export function RoomListTop(): ReactElement {
       <TopWrapStyle>
         <span>안읽은 대화({unReadRoom})</span>
 
-        <Button size={"BIG"} onClick={() => {}}>
+        <Button size={ButtonSizes.H38} onClick={handleCreateRoom}>
           + 새로운 메세지
         </Button>
       </TopWrapStyle>

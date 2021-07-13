@@ -33,8 +33,19 @@ const getChatData = (searchValue?: string) => {
   return null;
 };
 
+const getChatDataId = (roomId: string) => {
+  const getData = sessionStorage.getItem(keyType.chat);
+  if (getData) {
+    // const parsed = JSON.parse(getData);
+    console.log("getData", getData);
+
+    // return parsed;
+  }
+  return null;
+};
+
 const commAPI = { getLoadData };
 const authAPI = { getLoadData };
-const chatAPI = { getChatData };
+const chatAPI = { getChatData, getChatDataId };
 
 export { commAPI, authAPI, chatAPI };

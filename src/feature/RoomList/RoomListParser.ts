@@ -7,14 +7,9 @@ import { IMemberAPI, IChatListAPI, IChatAPI } from "../../types";
 // 목적: 데이터 구분, 로직 분리
 export const roomListParser = (authUserId: string, chatData: IChatAPI[]) => {
   return chatData?.map((data: IChatAPI) => {
-    const {
-      room_id,
-      room_name,
-      room_img,
-      room_members,
-      chat_list,
-      last_chat_time,
-    } = data;
+    const { room_id, room_info, room_members, chat_list, last_chat_time } =
+      data;
+    const { name: roomName, img: roomImg, is_friend: isFriend } = room_info;
 
     const authUserLastVisitTime = room_members.find(
       (member: IMemberAPI) => member.id === authUserId
@@ -38,8 +33,8 @@ export const roomListParser = (authUserId: string, chatData: IChatAPI[]) => {
 
     return {
       roomId: room_id,
-      roomName: room_name,
-      roomImg: { url: room_img.avatar_url, isFriend: room_img.is_friend },
+      roomName: roomName,
+      roomImg: { url: roomImg, isFriend: isFriend },
       unReadChatLength: unReadChatLength,
       lastChatData: checkLastChat[0]?.data || "",
       lastChatTime: viewLastChatTime,

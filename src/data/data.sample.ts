@@ -12,7 +12,7 @@ const authUser = {
   avatar_url: avatar1,
 };
 
-const fruends = [
+const friends = [
   { id: "user1", nick_name: "최예슬", avatar_url: avatar2 },
   { id: "user2", nick_name: "김펀치", avatar_url: "" },
   { id: "user3", nick_name: "이윤호", avatar_url: "" },
@@ -21,8 +21,12 @@ const fruends = [
 const chat = [
   {
     room_id: "chatRoom4359309",
-    room_name: "최예슬",
-    room_img: { avatar_url: avatar2, is_friend: true },
+    room_info: {
+      name: "최예슬",
+      img: avatar2,
+      job: "웹앱 UX 디자이너",
+      is_friend: true,
+    },
     room_members: [
       { id: "roket", last_visit_time: LAST_VISIT },
       {
@@ -54,6 +58,6 @@ const chat = [
   },
 ];
 
-const dummyData = { authUser, fruends, chat };
+const dummyData = { authUser, friends, chat };
 
 export default dummyData;

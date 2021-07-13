@@ -9,6 +9,10 @@ import { Avatar } from "../../components/avatar";
 export function RoomList(): ReactElement {
   const roomList = Redux.useSelector(roomListSelector.selectRoomListData);
 
+  const handleShowChat = (roomId: string) => {
+    console.log(roomId);
+  };
+
   return (
     <Fragment>
       {roomList.map((room: IRoomList) => {
@@ -20,7 +24,11 @@ export function RoomList(): ReactElement {
         console.log(room);
 
         return (
-          <RoomItemStyle key={room.roomId} isOn={false} onClick={() => {}}>
+          <RoomItemStyle
+            key={room.roomId}
+            isOn={false}
+            onClick={() => handleShowChat(room.roomId)}
+          >
             <Avatar isFriend={room.roomImg.isFriend} url={room.roomImg.url} />
 
             <RoomItemInfoStyle>

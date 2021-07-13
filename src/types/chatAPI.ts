@@ -9,6 +9,18 @@ export interface IUserAPI {
   };
 }
 
+export interface IRoomInfoAPI {
+  name: string;
+  img: {
+    src: string;
+    height: number;
+    width: number;
+    blurDataURL?: string;
+  };
+  job: string;
+  is_friend: boolean;
+}
+
 export interface IMemberAPI {
   id: string;
   last_visit_time: number | null;
@@ -20,20 +32,9 @@ export interface IChatListAPI {
   time: number;
 }
 
-export interface IRoomImgAPI {
-  avatar_url: {
-    src: string;
-    height: number;
-    width: number;
-    blurDataURL?: string;
-  };
-  is_friend: boolean;
-}
-
 export interface IChatAPI {
   room_id: string;
-  room_name: string;
-  room_img: IRoomImgAPI;
+  room_info: IRoomInfoAPI;
   room_members: IMemberAPI[] | [];
   chat_list: IChatListAPI[] | [];
   last_chat_time: number;

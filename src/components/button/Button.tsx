@@ -15,9 +15,7 @@ export function Button({
   onClick,
   isDisabled,
 }: ButtonProps): ReactElement {
-  console.log("size", size);
   const getSizeStyle = ButtonSizesStyle[size];
-  console.log("getSizeStyle", getSizeStyle);
 
   return (
     <ButtonStyle
@@ -32,7 +30,7 @@ export function Button({
 }
 
 Button.defaultProps = {
-  size: ButtonSizes.FUll,
+  size: ButtonSizes.H30,
   isDisabled: false,
 };
 
