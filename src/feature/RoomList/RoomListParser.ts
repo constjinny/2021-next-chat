@@ -20,8 +20,9 @@ export const roomListParser = (authUserId: string, chatData: IChatAPI[]) => {
     const unReadChatLength = chat_list?.filter((item: IChatListAPI) => {
       if (authUserLastVisitTime) {
         return item.user.id !== authUserId && authUserLastVisitTime < item.time;
+      } else {
+        return item;
       }
-      return false;
     })?.length;
 
     const checkLastChat = sortUtil.sortedOderValue(chat_list, "time", false);
