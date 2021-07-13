@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { commAPI } from "../api/api.sample";
+import { commAPI } from "../src/api/api.sample";
 
 import { RoomListPage } from "../src/feature/RoomList";
 import { RoomPage } from "../src/feature/room";
@@ -25,15 +25,16 @@ export default function ChatApp() {
 
 const ChatAppLayout = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
 `;
 
 const LeftLayout = styled.div`
-  flex: 1.5;
-  background-color: plum;
+  overflow: hidden;
+  flex: 1;
 `;
 
 const RightLayout = styled.div`
-  flex: 2;
+  overflow: hidden;
+  flex: 1.5;
   background-color: pink;
 `;

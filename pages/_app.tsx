@@ -1,9 +1,19 @@
-import "../styles/globals.css";
+import styled from "@emotion/styled";
 import type { AppProps } from "next/app";
-import { wrapper } from "../store";
+import { wrapper } from "../src/store";
+import "../styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <AppLayout>
+      <Component {...pageProps} />
+    </AppLayout>
+  );
 }
 
 export default wrapper.withRedux(App);
+
+const AppLayout = styled.div`
+  min-width: 900px;
+  height: 100vh;
+`;

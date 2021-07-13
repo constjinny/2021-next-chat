@@ -19,7 +19,7 @@ export function SearchInput({
   return (
     <LabelStyle htmlFor="searchInput">
       {searchIcon}
-      <input
+      <InputStyle
         id="searchInput"
         type="text"
         value={value}
@@ -36,6 +36,21 @@ SearchInput.defaultProps = {
 };
 
 const LabelStyle = styled.label`
-  display: block;
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
   border: 1px solid #aaa;
+  border-radius: 30px;
+  svg {
+    font-size: 18px;
+    color: #aaa;
+    margin-top: 1px;
+  }
+`;
+
+const InputStyle = styled.input`
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin-left: 10px;
 `;
