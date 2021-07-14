@@ -9,8 +9,9 @@ import { RoomListPage } from "@features/roomList";
 import { RoomPage } from "@features/room";
 import { Button } from "@components/button";
 
-export default function ChatApp() {
+export default function ChatApp(props: any) {
   const { push } = useRouter();
+  const { fullback } = props;
   const [isLogin, setIsLogin] = useState(false);
 
   const checkLogin = useCallback(() => {
@@ -75,25 +76,37 @@ export default function ChatApp() {
 
       <h1>앱 홈</h1>
 
-      {isLogin && (
-        <ChatAppLayout>
-          <h2>대화 목록</h2>
-          <LeftLayout>
-            <RoomListPage />
-          </LeftLayout>
+      <ChatAppLayout>
+        {fullback ? (
+          isLogin && (
+            <Fragment>
+              <h2>대화 목록</h2>
+              <LeftLayout>
+                <RoomListPage />
+              </LeftLayout>
 
-          <h2>대화 내용</h2>
-          <RightLayout>
-            <RoomPage />
-          </RightLayout>
+              <h2>대화 내용</h2>
+              <RightLayout>
+                <RoomPage />
+              </RightLayout>
 
-          <LogoutButtonStyle>
-            <Button onClick={handleLogout}>logout</Button>
-          </LogoutButtonStyle>
-        </ChatAppLayout>
-      )}
+              <LogoutButtonStyle>
+                <Button onClick={handleLogout}>logout</Button>
+              </LogoutButtonStyle>
+            </Fragment>
+          )
+        ) : (
+          <div>loading...</div>
+        )}
+      </ChatAppLayout>
     </Fragment>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: { fullback: true },
+  };
 }
 
 const ChatAppLayout = styled.div`
