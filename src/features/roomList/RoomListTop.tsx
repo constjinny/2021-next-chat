@@ -95,9 +95,9 @@ export function RoomListTop(): ReactElement {
 
 const TopWrapStyle = styled.div`
   display: flex;
+  flex: 0 0 100px;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
   padding: 0 20px;
   background-color: ${colors.white};
   border-bottom: 1px solid ${colors.lightGray};
@@ -145,9 +145,9 @@ const CreateSelecteGroup = styled.div`
 
 const SearchWrapStyle = styled.div`
   display: flex;
+  flex: 0 0 70px;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
   padding: 0 20px;
   background-color: ${colors.white};
   border-bottom: 1px solid ${colors.lightGray};

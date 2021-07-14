@@ -27,7 +27,7 @@ export function RoomList(): ReactElement {
   };
 
   return (
-    <Fragment>
+    <RoomListWrapStyle>
       {roomList.map((room: IRoomList) => {
         const unRead = room.unReadChatLength > 0;
         const roomNameText = unRead
@@ -54,9 +54,13 @@ export function RoomList(): ReactElement {
           </RoomItemStyle>
         );
       })}
-    </Fragment>
+    </RoomListWrapStyle>
   );
 }
+
+const RoomListWrapStyle = styled.div`
+  overflow-y: auto;
+`;
 
 const RoomItemStyle = styled.div<{ isOn: boolean }>`
   overflow: hiddwn;

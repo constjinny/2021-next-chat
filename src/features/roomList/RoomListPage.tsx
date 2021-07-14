@@ -28,5 +28,7 @@ export function RoomListPage(): ReactElement {
 }
 
 const RoomListWrapStyle = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100%;
 `;
