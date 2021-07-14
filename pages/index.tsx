@@ -45,9 +45,12 @@ export default function ChatApp() {
   }, [push]);
 
   useEffect(() => {
+    // NOTI: 서비스 최초 접속시 데이터 로드 (API 대안)
+    commAPI.getLoadData();
+  }, []);
+
+  useEffect(() => {
     if (isLogin) {
-      // NOTI: 서비스 최초 접속시 데이터 로드
-      commAPI.getLoadData();
     } else {
       checkLogin();
     }
