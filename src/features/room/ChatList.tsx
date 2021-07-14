@@ -1,4 +1,4 @@
-import { ReactElement, Fragment, useState, useEffect, useRef } from "react";
+import { ReactElement, Fragment, useEffect, useRef } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import colors from "@constants/colors";

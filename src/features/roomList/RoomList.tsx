@@ -17,12 +17,12 @@ export function RoomList(): ReactElement {
   const roomList = Redux.useSelector(roomSelector.selectRoomListData);
 
   // NOTI: 선택한 대화방 데이터 조회
-  const handleShowChat = (roomId: string) => {
-    const roomDataAPI = chatAPI.getRoomData(roomId);
+  const handleShowChat = async (roomId: string) => {
+    const roomDataAPI = await chatAPI.getRoomData(roomId);
     if (roomDataAPI) {
       const pasedRoomData = roomDataParser(dummyData.authUser.id, roomDataAPI);
 
-      dispatch(roomAction.setCurrentRoomData({ room: pasedRoomData }));
+      dispatch(roomAction.updateCurrentRoomData({ room: pasedRoomData }));
     }
   };
 

@@ -8,7 +8,7 @@ const initialRoomState: IRoomState = {
   hasRoom: false,
   unReadRoom: 0,
   roomList: [],
-  onSearch: false,
+  searchText: "",
   friendList: [],
   currentRoom: { roomInfo: null, chatData: [] },
 };
@@ -17,37 +17,42 @@ export const roomSlice = createSlice({
   name: "roomSlice",
   initialState: initialRoomState,
   reducers: {
-    setRoomListData(
+    updateRoomData(
       state,
       action: PayloadAction<{
-        chat?: IRoomList[];
-        onSearch?: boolean;
-        friend?: IFriend[] | [];
+        room: IRoomList[] | [];
+        friend: IFriend[] | [];
       }>
     ) {
-      const { chat, onSearch = false, friend } = action.payload;
+      const { room, friend } = action.payload;
 
-      if (chat) {
-        const unReadRoom = chat?.filter(
+      if (room) {
+        const unReadRoom = room?.filter(
           (room: IRoomList) => room.unReadChatLength > 0
         )?.length;
 
-        state.hasRoom = chat?.length > 0;
+        state.hasRoom = room?.length > 0;
         state.unReadRoom = unReadRoom || 0;
-        state.roomList = chat;
+        state.roomList = room;
       }
-      state.onSearch = onSearch;
       if (friend) {
         state.friendList = friend;
       }
     },
-    setCurrentRoomData(state, action: PayloadAction<{ room: IRoom }>) {
+    updateCurrentRoomData(state, action: PayloadAction<{ room: IRoom }>) {
       const { room } = action.payload;
 
-      state.currentRoom = {
-        roomInfo: room?.roomInfo,
-        chatData: room?.chatData,
-      };
+      if (room) {
+        state.currentRoom = {
+          roomInfo: room?.roomInfo,
+          chatData: room?.chatData,
+        };
+      }
+    },
+    updateSearchText(state, action: PayloadAction<{ text: string }>) {
+      const { text } = action.payload;
+
+      state.searchText = text;
     },
   },
 });
@@ -58,7 +63,7 @@ export const roomReducer = roomSlice.reducer;
 const selectHasRoom = (state: rootState) => state.roomReducer.hasRoom;
 const selectUnReadRoom = (state: rootState) => state.roomReducer.unReadRoom;
 const selectRoomListData = (state: rootState) => state.roomReducer.roomList;
-const selectOnSearch = (state: rootState) => state.roomReducer.onSearch;
+const selectSearchText = (state: rootState) => state.roomReducer.searchText;
 const selectCurrentRoomId = (state: rootState) =>
   state.roomReducer.currentRoom?.roomInfo?.roomId;
 const selectCurrentRoomInfo = (state: rootState) =>
@@ -71,7 +76,7 @@ export const roomSelector = {
   selectHasRoom,
   selectUnReadRoom,
   selectRoomListData,
-  selectOnSearch,
+  selectSearchText,
   selectCurrentRoomId,
   selectCurrentRoomInfo,
   selectCurrentChatData,

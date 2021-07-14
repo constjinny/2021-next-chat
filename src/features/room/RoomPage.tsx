@@ -8,12 +8,8 @@ import { RoomTop } from "./RoomTop";
 import { ChatList } from "./ChatList";
 import { ChatTextarea } from "./ChatTextarea";
 
-import {
-  roomAction,
-  roomSelector,
-  roomListParser,
-  roomDataParser,
-} from "@features/roomList";
+import { useData } from "@hooks/useData";
+import { roomAction, roomSelector, roomDataParser } from "@features/roomList";
 import { NoData } from "@components/noData";
 
 export function RoomPage(): ReactElement {
@@ -21,17 +17,7 @@ export function RoomPage(): ReactElement {
   const roomId = Redux.useSelector(roomSelector.selectCurrentRoomId);
   const hasRoomData = Redux.useSelector(roomSelector.selectCurrentRoomInfo);
 
-  // NOTI: 2. 전체 대화방 데이터 업데이트
-  const getRoomListData = useCallback(async () => {
-    const chatDataAPI = await chatAPI.getChatData();
-    if (chatDataAPI) {
-      const pasedChatData = roomListParser(dummyData.authUser.id, chatDataAPI);
-
-      dispatch(roomAction.setRoomListData({ chat: pasedChatData }));
-    }
-  }, [dispatch]);
-
-  // NOTI: 1. 대화방 방문 시간 업데이트
+  // NOTI: 대화방 방문 시간 업데이트
   const updatVisitTime = useCallback(async () => {
     if (roomId) {
       const roomDataAPI = await chatAPI.updateRoomVisitTime(roomId);
@@ -41,19 +27,20 @@ export function RoomPage(): ReactElement {
           roomDataAPI
         );
 
-        getRoomListData();
         dispatch(
-          roomAction.setCurrentRoomData({
+          roomAction.updateCurrentRoomData({
             room: pasedRoomData,
           })
         );
       }
     }
-  }, [dispatch, roomId, getRoomListData]);
+  }, [roomId, dispatch]);
 
   useEffect(() => {
     updatVisitTime();
   }, [updatVisitTime]);
+
+  useData();
 
   return (
     <RoomWrapStyle>

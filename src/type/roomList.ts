@@ -24,7 +24,7 @@ export interface IRoomState {
   hasRoom: boolean;
   unReadRoom: number;
   roomList: IRoomList[] | [];
-  onSearch: boolean;
+  searchText: string;
   currentRoom: IRoom;
   friendList: IFriend[] | [];
 }
