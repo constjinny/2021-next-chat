@@ -2,7 +2,7 @@ import { ReactElement, Fragment, useState, useEffect, useRef } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import colors from "@constants/colors";
-import { IRoomChatItem } from "@types/room";
+import { IRoomChatItem } from "@type/room";
 
 import { roomSelector } from "@features/RoomList";
 import { Avatar } from "@components/avatar";

@@ -15,7 +15,7 @@ module.exports = {
           "@data": "./src/data",
           "@features": "./src/features",
           "@store": "./src/store",
-          "@types": "./types",
+          "@type": "./type",
           "@utils": "./utils",
         },
       },

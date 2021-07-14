@@ -9,7 +9,7 @@ import { roomDataParser } from "./RoomParser";
 import { roomAction, roomSelector } from "./RoomSlice";
 
 import { Avatar } from "@components/avatar";
-import { IRoomList } from "@types/roomList";
+import { IRoomList } from "@type/roomList";
 
 export function RoomList(): ReactElement {
   const dispatch = Redux.useDispatch();

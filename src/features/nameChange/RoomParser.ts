@@ -9,7 +9,7 @@ import {
   IRoomAPI,
   IChatListAPI,
   IUserAPI,
-} from "@types/chatAPI";
+} from "@type/chatAPI";
 
 // NOTI:
 // 기능: API 데이터 재 가공 -> roomList reducer

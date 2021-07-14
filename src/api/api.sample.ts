@@ -5,7 +5,7 @@ import {
   IChatListAPI,
   IRoomMemberAPI,
   IUserAPI,
-} from "@types/chatAPI";
+} from "@type/chatAPI";
 
 enum keyType {
   AUTH = "AUTH",

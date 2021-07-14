@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { rootState } from "@store/index";
 
-import { IRoom } from "@types/room";
-import { IRoomState, IRoomList, IFriend } from "@types/roomList";
+import { IRoom } from "@type/room";
+import { IRoomState, IRoomList, IFriend } from "@type/roomList";
 
 const initialRoomState: IRoomState = {
   hasRoom: false,

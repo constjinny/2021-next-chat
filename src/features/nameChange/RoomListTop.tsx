@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 import colors from "@constants/colors";
 import { chatAPI, friendAPI } from "@api/api.sample";
 import dummyData from "@data/data.sample";
-import { IFriend } from "@types/roomList";
+import { IFriend } from "@type/roomList";
 
 import { roomListParser, friendDataParser, roomDataParser } from "./RoomParser";
 import { roomAction, roomSelector } from "./RoomSlice";
