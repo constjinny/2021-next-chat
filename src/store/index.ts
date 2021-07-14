@@ -7,13 +7,11 @@ import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import axios from "axios";
 import getConfig from "next/config";
 
-import { roomListReducer } from "../feature/RoomList";
-import { roomReducer } from "../feature/room";
+import { roomReducer } from "@features/RoomList";
 
 axios.defaults.baseURL = getConfig().publicRuntimeConfig.apiServerUrl;
 
 const rootReducer = combineReducers({
-  roomListReducer,
   roomReducer,
 });
 

@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
-import colors from "../../constant/color";
+import colors from "@constants/colors";
 
 export interface ITagProps {
   margin?: string;

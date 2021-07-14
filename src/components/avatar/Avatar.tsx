@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import colors from "../../constant/color";
+import colors from "@constants/colors";
 
 export interface IAvatarProps {
   hideLine: boolean;

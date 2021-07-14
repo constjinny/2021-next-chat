@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-import avatar1 from "../../public/images/user1-avatar.png";
-import avatar2 from "../../public/images/user2-avatar.png";
-import avatar3 from "../../public/images/user3-avatar.png";
+import avatar1 from "@public/images/user1-avatar.png";
+import avatar2 from "@public/images/user2-avatar.png";
+import avatar3 from "@public/images/user3-avatar.png";
 
 const LAST_VISIT = dayjs().subtract(48, "hour").valueOf();
 

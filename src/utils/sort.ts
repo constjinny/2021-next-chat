@@ -5,4 +5,6 @@ const sortedOderValue = (list: any[], orderName: string, orders: boolean) => {
   return _(list)?.orderBy(orderName, ordersValue).value();
 };
 
-export const sortUtil = { sortedOderValue };
+const sortUtil = { sortedOderValue };
+
+export default sortUtil;

@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
-import { wrapper } from "../src/store";
 import styled from "@emotion/styled";
 import "../styles/globals.css";
+
+import { wrapper } from "@store/index";
 
 function App({ Component, pageProps }: AppProps) {
   return (

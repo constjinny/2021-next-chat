@@ -1,13 +1,13 @@
 import { ReactElement } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
-import colors from "../../constant/color";
+import colors from "@constants/colors";
 
-import { roomSelector } from "./RoomSlice";
-import { Tag } from "../../components/tag";
+import { roomSelector } from "@features/RoomList";
+import { Tag } from "@components/tag";
 
 export function RoomTop(): ReactElement {
-  const roomInfo = Redux.useSelector(roomSelector.selectRoomInfo);
+  const roomInfo = Redux.useSelector(roomSelector.selectCurrentRoomInfo);
 
   return (
     <TopWrapStyle>

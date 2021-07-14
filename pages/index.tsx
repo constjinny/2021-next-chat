@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { commAPI } from "../src/api/api.sample";
+import { commAPI } from "@api/api.sample";
 
-import { RoomListPage } from "../src/feature/RoomList";
-import { RoomPage } from "../src/feature/room";
+import { RoomListPage } from "@features/RoomList";
+import { RoomPage } from "@features/room";
 
 export default function ChatApp() {
   useEffect(() => {

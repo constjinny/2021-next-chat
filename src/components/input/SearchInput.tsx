@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import colors from "../../constant/color";
+import colors from "@constants/colors";
 
 export interface ISearchInputProps {
   value: string;

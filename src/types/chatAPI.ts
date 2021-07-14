@@ -21,7 +21,7 @@ export interface IRoomInfoAPI {
   is_friend: boolean;
 }
 
-export interface IMemberAPI {
+export interface IRoomMemberAPI {
   id: string;
   last_visit_time: number | null;
 }
@@ -32,10 +32,10 @@ export interface IChatListAPI {
   time: number;
 }
 
-export interface IChatAPI {
+export interface IRoomAPI {
   room_id: string;
   room_info: IRoomInfoAPI;
-  room_members: IMemberAPI[] | [];
+  room_members: IRoomMemberAPI[] | [];
   chat_list: IChatListAPI[] | [];
   last_chat_time: number;
 }

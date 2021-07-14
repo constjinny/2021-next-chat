@@ -2,20 +2,26 @@ import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import { isNull } from "lodash";
 import { friendAPI } from "../../api/api.sample";
-import { timeUtil, sortUtil } from "../../utils";
-import { IMemberAPI, IChatListAPI, IChatAPI } from "../../types";
+import sortUtil from "@utils/sort";
+import timeUtil from "@utils/time";
+import {
+  IRoomMemberAPI,
+  IRoomAPI,
+  IChatListAPI,
+  IUserAPI,
+} from "@types/chatAPI";
 
 // NOTI:
 // 기능: API 데이터 재 가공 -> roomList reducer
 // 목적: 데이터 구분, 로직 분리
-export const roomListParser = (authUserId: string, chatData: IChatAPI[]) => {
-  return chatData?.map((data: IChatAPI) => {
+export const roomListParser = (authUserId: string, roomDataAPI: IRoomAPI[]) => {
+  return roomDataAPI?.map((data: IRoomAPI) => {
     const { room_id, room_info, room_members, chat_list, last_chat_time } =
       data;
     const { name: roomName, img: roomImg, is_friend: isFriend } = room_info;
 
     const authUserLastVisitTime = room_members.find(
-      (member: IMemberAPI) => member.id === authUserId
+      (member: IRoomMemberAPI) => member.id === authUserId
     )?.last_visit_time;
 
     const unReadChatLength = chat_list?.filter((item: IChatListAPI) => {
@@ -53,7 +59,7 @@ dayjs.extend(weekday);
 // 목적: 데이터 구분, 로직 분리
 export const roomDataParser = (
   authUserId: string,
-  currentRoomDataAPI: IChatAPI
+  currentRoomDataAPI: IRoomAPI
 ) => {
   const { room_id, room_info, room_members, chat_list } = currentRoomDataAPI;
   const {
@@ -71,11 +77,11 @@ export const roomDataParser = (
     const isFriend = isAuth ? false : friendAPI.findFriendId(user.id);
 
     const otherMembers = room_members.filter(
-      (member: IMemberAPI) => member.id !== user.id
+      (member: IRoomMemberAPI) => member.id !== user.id
     );
 
     const unReadLength = otherMembers.filter(
-      (member: IMemberAPI) =>
+      (member: IRoomMemberAPI) =>
         isNull(member.last_visit_time) || member.last_visit_time < time
     )?.length;
 
@@ -118,4 +124,13 @@ export const roomDataParser = (
     },
     chatData: sortChatData,
   };
+};
+
+export const friendDataParser = (friendDataAPI: IUserAPI[]) => {
+  const parsed = friendDataAPI.map((friend: IUserAPI) => {
+    const { id, nick_name: nickName } = friend;
+    return { id, nickName };
+  });
+
+  return parsed;
 };

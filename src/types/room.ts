@@ -1,8 +1,3 @@
-export interface IChatItemStyle {
-  isAuth: boolean;
-  duration: number;
-}
-
 export interface IRoomInfo {
   roomId: string;
   roomName: string;
@@ -16,7 +11,7 @@ export interface IRoomInfo {
   roomJob: string;
 }
 
-export interface IChatUser {
+export interface IRoomChatUser {
   id: string;
   nickName: string;
   avatarUrl: {
@@ -27,8 +22,8 @@ export interface IChatUser {
   };
 }
 
-export interface IChatItem {
-  user: IChatUser;
+export interface IRoomChatItem {
+  user: IRoomChatUser;
   isAuth: boolean;
   isFriend: boolean;
   isDateGroup: boolean;
@@ -40,11 +35,7 @@ export interface IChatItem {
   data: string;
 }
 
-export interface IChatRoom {
+export interface IRoom {
   roomInfo: IRoomInfo | null;
-  chatData: IChatItem[] | [];
-}
-
-export interface IChatRoomState extends IChatRoom {
-  hasRoomData: boolean;
+  chatData: IRoomChatItem[] | [];
 }

@@ -1,21 +1,25 @@
 import { ReactElement, Fragment, useState, useEffect, useRef } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
-import { chatAPI } from "../../api/api.sample";
-import { IChatItem } from "../../types";
-import dummyData from "../../data/data.sample"; // TODO: 제거
-import colors from "../../constant/color";
+import colors from "@constants/colors";
+import { chatAPI } from "@api/api.sample";
+import { IRoomChatItem } from "@types/room";
+import dummyData from "@data/data.sample"; // TODO: 제거
 
-import { roomSelector, roomAction } from "./RoomSlice";
-import { roomListAction, roomListParser, roomDataParser } from "../RoomList";
-import { Avatar } from "../../components/avatar";
-import { Textarea } from "../../components/input";
+import {
+  roomAction,
+  roomSelector,
+  roomListParser,
+  roomDataParser,
+} from "@features/RoomList";
+import { Avatar } from "@components/avatar";
+import { Textarea } from "@components/input";
 
 export function ChatList(): ReactElement {
   const dispatch = Redux.useDispatch();
   const scrollTargetRef = useRef() as React.MutableRefObject<HTMLLIElement>;
-  const roomId = Redux.useSelector(roomSelector.selectRoomId);
-  const chatData = Redux.useSelector(roomSelector.selectChatData);
+  const roomId = Redux.useSelector(roomSelector.selectCurrentRoomId);
+  const chatData = Redux.useSelector(roomSelector.selectCurrentChatData);
   const [textValue, setTextValue] = useState("");
 
   useEffect(() => {
@@ -30,20 +34,23 @@ export function ChatList(): ReactElement {
     if (data) {
       const pasedData = roomListParser(dummyData.authUser.id, data);
 
-      dispatch(roomListAction.setRoomListData({ data: pasedData }));
+      dispatch(roomAction.setRoomListData({ data: pasedData }));
     }
   };
 
   const onSubmitNewChat = async () => {
     if (roomId && textValue) {
-      const data = await chatAPI.addRoomNewChat(roomId, textValue);
-      if (data) {
-        const pasedData = roomDataParser(dummyData.authUser.id, data);
+      const roomDataAPI = await chatAPI.addRoomNewChat(roomId, textValue);
+      if (roomDataAPI) {
+        const pasedRoomData = roomDataParser(
+          dummyData.authUser.id,
+          roomDataAPI
+        );
 
         getRoomListData();
         dispatch(
-          roomAction.setRoomData({
-            data: pasedData,
+          roomAction.setCurrentRoomData({
+            room: pasedRoomData,
           })
         );
         setTextValue("");
@@ -55,7 +62,7 @@ export function ChatList(): ReactElement {
   return (
     <ChatListWrapStyle>
       <ChatListStyle>
-        {chatData.map((chat: IChatItem, index: number) => {
+        {chatData.map((chat: IRoomChatItem, index: number) => {
           const {
             user,
             isAuth,

@@ -9,4 +9,6 @@ const changeTimeFormatTo12 = (originDate: any) => {
   return result;
 };
 
-export const timeUtil = { changeTimeFormatTo12 };
+const timeUtil = { changeTimeFormatTo12 };
+
+export default timeUtil;

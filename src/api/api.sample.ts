@@ -1,21 +1,21 @@
 import dayjs from "dayjs";
 import dummyData from "../data/data.sample";
-import { IChatAPI, IChatListAPI, IMemberAPI } from "../types";
+import { IRoomAPI, IChatListAPI, IRoomMemberAPI } from "@types/chatAPI";
 
 enum keyType {
-  auth = "AUTH",
-  chat = "CHAT",
-  friend = "FRIENDS",
+  AUTH = "AUTH",
+  CHAT = "CHAT",
+  FRIENDS = "FRIENDS",
 }
 
 const getLoadData = () => {
-  sessionStorage.setItem(keyType.auth, JSON.stringify(dummyData.authUser));
-  sessionStorage.setItem(keyType.chat, JSON.stringify(dummyData.chat));
-  sessionStorage.setItem(keyType.friend, JSON.stringify(dummyData.friends));
+  sessionStorage.setItem(keyType.AUTH, JSON.stringify(dummyData.authUser));
+  sessionStorage.setItem(keyType.CHAT, JSON.stringify(dummyData.chat));
+  sessionStorage.setItem(keyType.FRIENDS, JSON.stringify(dummyData.friends));
 };
 
 const getAuthData = () => {
-  const getData = sessionStorage.getItem(keyType.auth);
+  const getData = sessionStorage.getItem(keyType.AUTH);
   if (getData) {
     const parsed = JSON.parse(getData);
 
@@ -25,7 +25,7 @@ const getAuthData = () => {
 };
 
 const getFriendData = () => {
-  const getData = sessionStorage.getItem(keyType.friend);
+  const getData = sessionStorage.getItem(keyType.FRIENDS);
   if (getData) {
     const parsed = JSON.parse(getData);
 
@@ -35,7 +35,7 @@ const getFriendData = () => {
 };
 
 const findFriendId = (id: string) => {
-  const getData = sessionStorage.getItem(keyType.friend);
+  const getData = sessionStorage.getItem(keyType.FRIENDS);
   if (getData) {
     const parsed = JSON.parse(getData);
     const findId = parsed.find((friend: any) => friend.id === id);
@@ -46,11 +46,11 @@ const findFriendId = (id: string) => {
 };
 
 const getChatData = (searchValue?: string) => {
-  const getData = sessionStorage.getItem(keyType.chat);
+  const getData = sessionStorage.getItem(keyType.CHAT);
   if (getData) {
     const parsed = JSON.parse(getData);
     if (searchValue) {
-      const findChat = parsed.filter((chatData: IChatAPI) =>
+      const findChat = parsed.filter((chatData: IRoomAPI) =>
         chatData.chat_list.some(
           (chatListData: IChatListAPI) =>
             chatListData.data.indexOf(searchValue) > -1
@@ -66,11 +66,11 @@ const getChatData = (searchValue?: string) => {
 };
 
 const getRoomData = (roomId: string) => {
-  const getData = sessionStorage.getItem(keyType.chat);
+  const getData = sessionStorage.getItem(keyType.CHAT);
   if (getData) {
     const parsed = JSON.parse(getData);
     const findRoom = parsed.filter(
-      (roomData: IChatAPI) => roomData.room_id === roomId
+      (roomData: IRoomAPI) => roomData.room_id === roomId
     );
 
     if (findRoom) {
@@ -81,17 +81,17 @@ const getRoomData = (roomId: string) => {
 };
 
 const updateRoomVisitTime = (roomId: string) => {
-  const getChatData = sessionStorage.getItem(keyType.chat);
-  const getAuth = sessionStorage.getItem(keyType.auth);
+  const getChatData = sessionStorage.getItem(keyType.CHAT);
+  const getAuth = sessionStorage.getItem(keyType.AUTH);
   if (getChatData && getAuth) {
     const timeStamp = dayjs().valueOf();
     const parsedChat = JSON.parse(getChatData);
     const parsedAuth = JSON.parse(getAuth);
 
-    const updateData = parsedChat.map((roomData: IChatAPI) => {
+    const updateData = parsedChat.map((roomData: IRoomAPI) => {
       if (roomData.room_id === roomId) {
         const { room_members } = roomData;
-        const updateRoomMembers = room_members.map((member: IMemberAPI) => {
+        const updateRoomMembers = room_members.map((member: IRoomMemberAPI) => {
           if (member.id === parsedAuth.id) {
             return { ...member, last_visit_time: timeStamp };
           } else {
@@ -105,18 +105,20 @@ const updateRoomVisitTime = (roomId: string) => {
     });
 
     const resultData = updateData.filter(
-      (roomData: IChatAPI) => roomData.room_id === roomId
+      (roomData: IRoomAPI) => roomData.room_id === roomId
     );
 
-    sessionStorage.setItem(keyType.chat, JSON.stringify(updateData));
+    sessionStorage.setItem(keyType.CHAT, JSON.stringify(updateData));
     return resultData[0];
   }
   return null;
 };
 
+const addNewRoom = (friendId: string) => {};
+
 const addRoomNewChat = (roomId: string, newChat: string) => {
-  const getChatData = sessionStorage.getItem(keyType.chat);
-  const getAuth = sessionStorage.getItem(keyType.auth);
+  const getChatData = sessionStorage.getItem(keyType.CHAT);
+  const getAuth = sessionStorage.getItem(keyType.AUTH);
 
   if (getChatData && getAuth) {
     const timeStamp = dayjs().valueOf();
@@ -129,7 +131,7 @@ const addRoomNewChat = (roomId: string, newChat: string) => {
       time: timeStamp,
     };
 
-    const updateData = parsedChat.map((roomData: IChatAPI) => {
+    const updateData = parsedChat.map((roomData: IRoomAPI) => {
       if (roomData.room_id === roomId) {
         const updateChatList = [...roomData.chat_list, newChatData];
         return { ...roomData, chat_list: updateChatList };
@@ -139,10 +141,10 @@ const addRoomNewChat = (roomId: string, newChat: string) => {
     });
 
     const resultData = updateData.filter(
-      (roomData: IChatAPI) => roomData.room_id === roomId
+      (roomData: IRoomAPI) => roomData.room_id === roomId
     );
 
-    sessionStorage.setItem(keyType.chat, JSON.stringify(updateData));
+    sessionStorage.setItem(keyType.CHAT, JSON.stringify(updateData));
     return resultData[0];
   }
   return null;
@@ -155,6 +157,7 @@ const chatAPI = {
   getChatData,
   getRoomData,
   updateRoomVisitTime,
+  addNewRoom,
   addRoomNewChat,
 };
 

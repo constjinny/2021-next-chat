@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
+import colors from "@constants/colors";
 
 export interface IInputProps {
   id: string;
@@ -38,7 +39,7 @@ const LabelStyle = styled.label`
   display: flex;
   width: 100%;
   padding: 10px 20px;
-  border: 1px solid #aaa;
+  border: 1px solid ${colors.gray};
   border-radius: 30px;
 `;
 

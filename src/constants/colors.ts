@@ -1,7 +1,8 @@
 const colors: { [k: string]: string } = {
   white: "#fff",
-  lightGray: "#e4e4e4",
-  gray: "#aaa",
+  white2: "#EFEFEF",
+  lightGray: "#D9D8D8",
+  gray: "#CECECE",
   darkGray: "#999",
   black: "rgba(54, 58, 66, 0.4)",
   mint: "#00C7B8",

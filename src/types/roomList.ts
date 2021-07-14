@@ -1,6 +1,13 @@
+import { IRoom } from "./room";
+
 export interface IRoomImg {
   url: { src: string; height: number; width: number; blurDataURL?: string };
   isFriend: boolean;
+}
+
+export interface IFriend {
+  id: string;
+  nickName: string;
 }
 
 export interface IRoomList {
@@ -12,9 +19,11 @@ export interface IRoomList {
   unReadChatLength: number;
 }
 
-export interface IRoomListReducer {
+export interface IRoomState {
   hasRoom: boolean;
   unReadRoom: number;
   roomList: IRoomList[] | [];
   onSearch: boolean;
+  currentRoom: IRoom;
+  friendList: IFriend[] | [];
 }

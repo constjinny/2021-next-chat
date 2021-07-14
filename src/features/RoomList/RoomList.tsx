@@ -1,28 +1,28 @@
 import { ReactElement, Fragment } from "react";
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
-import { chatAPI } from "../../api/api.sample";
-import dummyData from "../../data/data.sample"; // TODO: 제거
-import colors from "../../constant/color";
+import colors from "@constants/colors";
+import { chatAPI } from "@api/api.sample";
+import dummyData from "@data/data.sample"; // TODO: 제거
 
-import { roomDataParser } from "./RoomListParser";
-import { roomListSelector } from "./RoomListSlice";
-import { roomAction, roomSelector } from "../room";
-import { Avatar } from "../../components/avatar";
-import { IRoomList } from "../../types";
+import { roomDataParser } from "./RoomParser";
+import { roomAction, roomSelector } from "./RoomSlice";
+
+import { Avatar } from "@components/avatar";
+import { IRoomList } from "@types/roomList";
 
 export function RoomList(): ReactElement {
   const dispatch = Redux.useDispatch();
-  const currentRoomId = Redux.useSelector(roomSelector.selectRoomId);
-  const roomList = Redux.useSelector(roomListSelector.selectRoomListData);
+  const currentRoomId = Redux.useSelector(roomSelector.selectCurrentRoomId);
+  const roomList = Redux.useSelector(roomSelector.selectRoomListData);
 
-  // NOTI: 선택한 채팅방 데이터 조회
+  // NOTI: 선택한 대화방 데이터 조회
   const handleShowChat = (roomId: string) => {
-    const data = chatAPI.getRoomData(roomId);
-    if (data) {
-      const pasedData = roomDataParser(dummyData.authUser.id, data);
+    const roomDataAPI = chatAPI.getRoomData(roomId);
+    if (roomDataAPI) {
+      const pasedRoomData = roomDataParser(dummyData.authUser.id, roomDataAPI);
 
-      dispatch(roomAction.setRoomData({ data: pasedData }));
+      dispatch(roomAction.setCurrentRoomData({ room: pasedRoomData }));
     }
   };
 

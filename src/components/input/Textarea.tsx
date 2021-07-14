@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import styled from "@emotion/styled";
-import colors from "../../constant/color";
+import colors from "@constants/colors";
 
-import { Button } from "../button";
+import { Button } from "@components/button";
 
 export interface ITextareaProps {
   value: string;
@@ -68,7 +68,7 @@ const TextareaStyle = styled.textarea`
 const ButtonBoxStyle = styled.div`
   overflow: hidden;
   padding: 8px 10px;
-  background-color: ${colors.lightGray};
+  background-color: ${colors.white2};
   border-top: 1px solid ${colors.gray};
   > button {
     float: right;
