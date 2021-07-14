@@ -171,6 +171,15 @@ const chat = [
         data: "나도 이제 곧 포폴 준비해야 하는데 나중에 완성되면 한번 봐줘",
         time: dayjs(LAST_VISIT).subtract(120, "hour").valueOf(),
       },
+      {
+        user: {
+          id: "friend3",
+          nick_name: "이윤호",
+          avatar_url: avatar3,
+        },
+        data: "이거 한번 봐줄래? https://github.com/constjinny",
+        time: dayjs(LAST_VISIT).subtract(1, "hour").valueOf(),
+      },
     ],
     last_chat_time: dayjs(LAST_VISIT).subtract(120, "hour").valueOf(),
   },

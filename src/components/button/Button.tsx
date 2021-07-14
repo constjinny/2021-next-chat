@@ -42,4 +42,7 @@ const ButtonStyle = styled.button<{ size: any }>`
   border-radius: 20px;
   color: ${colors.white};
   ${({ size }) => size};
+  &:disabled {
+    background-color: ${colors.purple};
+  }
 `;

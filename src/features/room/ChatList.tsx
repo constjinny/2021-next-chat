@@ -36,7 +36,14 @@ export function ChatList(): ReactElement {
           } = chat;
           const { nickName, avatarUrl } = user;
 
-          const checkEnterInData = data.replace(/\n/g, "<br/>");
+          const enterRegex = /\n/g;
+          const linkRegex =
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+          const checkEnterInData = data.replace(enterRegex, "<br/>");
+          const checkLinkText = checkEnterInData.replace(
+            linkRegex,
+            (link) => `<a href="${link}" target="_banck">${link}</a>`
+          );
 
           return (
             <li key={time}>
@@ -52,7 +59,7 @@ export function ChatList(): ReactElement {
               </ChatInfoStyle>
 
               <ChatDataStyle
-                dangerouslySetInnerHTML={{ __html: checkEnterInData }}
+                dangerouslySetInnerHTML={{ __html: checkLinkText }}
               />
 
               <TimeDataStyle>
@@ -89,6 +96,10 @@ const ChatListStyle = styled.ol`
 const ChatDataStyle = styled.p`
   margin-left: 60px;
   line-height: 1.5;
+  > a {
+    text-decoration: underline;
+    color: ${colors.darkPurple};
+  }
 `;
 
 const TimeDataStyle = styled.div`

@@ -41,6 +41,7 @@ const LabelStyle = styled.label`
   padding: 10px 20px;
   border: 1px solid ${colors.gray};
   border-radius: 30px;
+  box-sizing: border-box;
 `;
 
 const InputStyle = styled.input`

@@ -145,6 +145,7 @@ const TopWrapStyle = styled.div`
 const CreateSelecteGroup = styled.div`
   position: relative;
   width: 113px;
+  height: 38px;
   &:after {
     display: block;
     clear: both;
