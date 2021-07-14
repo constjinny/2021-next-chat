@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "@emotion/styled";
 import { commAPI } from "@api/api.sample";
 
-import { RoomListPage } from "@features/RoomList";
+import { RoomListPage } from "@features/roomList";
 import { RoomPage } from "@features/room";
 import { Button } from "@components/button";
 
