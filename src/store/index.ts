@@ -7,7 +7,7 @@ import { HYDRATE, createWrapper } from "next-redux-wrapper";
 import axios from "axios";
 import getConfig from "next/config";
 
-import { roomReducer } from "@features/nameChange";
+import { roomReducer } from "@features/roomList";
 
 axios.defaults.baseURL = getConfig().publicRuntimeConfig.apiServerUrl;
 
