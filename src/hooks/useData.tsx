@@ -11,7 +11,6 @@ import {
 } from "@features/roomList";
 
 export function useData() {
-  console.log("useData");
   const dispatch = Redux.useDispatch();
   const searchText = Redux.useSelector(roomSelector.selectSearchText);
 
