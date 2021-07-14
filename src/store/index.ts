@@ -9,7 +9,7 @@ import getConfig from "next/config";
 
 import { roomReducer } from "@features/roomList";
 
-axios.defaults.baseURL = getConfig().publicRuntimeConfig.apiServerUrl;
+axios.defaults.baseURL = getConfig().publicRuntimeConfig?.apiServerUrl;
 
 const rootReducer = combineReducers({
   roomReducer,

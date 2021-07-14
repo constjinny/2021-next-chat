@@ -7,8 +7,9 @@ import styled from "@emotion/styled";
 import { Input } from "@components/input";
 import { Button, ButtonSizes } from "@components/button";
 
-export default function ChatApp() {
+export default function ChatApp(props: any) {
   const { push } = useRouter();
+  const { fullback } = props;
   const [idValue, setIdValue] = useState<any>("");
   const [pwValue, setPwValue] = useState<any>("");
   const onLoginButton = idValue !== "" && pwValue !== "";
@@ -47,36 +48,48 @@ export default function ChatApp() {
 
       <LoginLayout>
         <div>
-          <p>
-            임시용 입니다. <br />
-            임의의 id, pw 입력해주세요.
-          </p>
+          {fullback ? (
+            <Fragment>
+              <p>
+                임시용 입니다. <br />
+                임의의 id, pw 입력해주세요.
+              </p>
 
-          <Input
-            id={"inoutId"}
-            value={idValue}
-            placeholder="id"
-            onChange={setIdValue}
-          />
-          <Input
-            id={"inoutPw"}
-            type="password"
-            value={pwValue}
-            placeholder="password"
-            onChange={setPwValue}
-          />
+              <Input
+                id={"inoutId"}
+                value={idValue}
+                placeholder="id"
+                onChange={setIdValue}
+              />
+              <Input
+                id={"inoutPw"}
+                type="password"
+                value={pwValue}
+                placeholder="password"
+                onChange={setPwValue}
+              />
 
-          <Button
-            size={ButtonSizes.FULL}
-            isDisabled={!onLoginButton}
-            onClick={handleSubmitLogin}
-          >
-            login
-          </Button>
+              <Button
+                size={ButtonSizes.FULL}
+                isDisabled={!onLoginButton}
+                onClick={handleSubmitLogin}
+              >
+                login
+              </Button>
+            </Fragment>
+          ) : (
+            <div></div>
+          )}
         </div>
       </LoginLayout>
     </Fragment>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: { fullback: true },
+  };
 }
 
 const LoginLayout = styled.div`

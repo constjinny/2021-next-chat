@@ -1,4 +1,4 @@
-export * from "./roomList";
+export * from "./RoomList";
 export * from "./RoomListPage";
 export * from "./RoomListTop";
 export * from "./RoomSlice";
