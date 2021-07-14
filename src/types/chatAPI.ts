@@ -7,6 +7,7 @@ export interface IUserAPI {
     width: number;
     blurDataURL?: string;
   };
+  job?: string;
 }
 
 export interface IRoomInfoAPI {

@@ -14,8 +14,8 @@ import {
 // NOTI:
 // 기능: API 데이터 재 가공 -> roomList reducer
 // 목적: 데이터 구분, 로직 분리
-export const roomListParser = (authUserId: string, roomDataAPI: IRoomAPI[]) => {
-  return roomDataAPI?.map((data: IRoomAPI) => {
+export const roomListParser = (authUserId: string, chatDataAPI: IRoomAPI[]) => {
+  const parsedChatData = chatDataAPI?.map((data: IRoomAPI) => {
     const { room_id, room_info, room_members, chat_list, last_chat_time } =
       data;
     const { name: roomName, img: roomImg, is_friend: isFriend } = room_info;
@@ -48,8 +48,13 @@ export const roomListParser = (authUserId: string, roomDataAPI: IRoomAPI[]) => {
       unReadChatLength: unReadChatLength,
       lastChatData: checkLastChat[0]?.data || "",
       lastChatTime: viewLastChatTime,
+      time: last_chat_time,
     };
   });
+
+  const sortChatData = sortUtil.sortedOderValue(parsedChatData, "time", false);
+
+  return sortChatData;
 };
 
 dayjs.extend(weekday);
@@ -69,7 +74,7 @@ export const roomDataParser = (
     job: roomJob,
   } = room_info;
 
-  const filterChatData = chat_list.map((chat: IChatListAPI, index: number) => {
+  const parsedRoomData = chat_list.map((chat: IChatListAPI, index: number) => {
     const { user, time } = chat;
     const { id, nick_name: nickName, avatar_url: avatarUrl } = user;
 
@@ -112,7 +117,7 @@ export const roomDataParser = (
     };
   });
 
-  const sortChatData = sortUtil.sortedOderValue(filterChatData, "time", true);
+  const sortRoomData = sortUtil.sortedOderValue(parsedRoomData, "time", true);
 
   return {
     roomInfo: {
@@ -120,16 +125,27 @@ export const roomDataParser = (
       roomName,
       roomImg,
       isFriend,
-      roomJob,
+      roomJob: roomJob ? roomJob : "정보 없음",
     },
-    chatData: sortChatData,
+    chatData: sortRoomData,
   };
 };
 
-export const friendDataParser = (friendDataAPI: IUserAPI[]) => {
+export const friendDataParser = (
+  friendDataAPI: IUserAPI[],
+  chatDataAPI: IRoomAPI[]
+) => {
   const parsed = friendDataAPI.map((friend: IUserAPI) => {
     const { id, nick_name: nickName } = friend;
-    return { id, nickName };
+
+    const findRoom =
+      chatDataAPI?.filter((chatData: IRoomAPI) =>
+        chatData.room_members.some(
+          (member: IRoomMemberAPI) => member.id.indexOf(id) > -1
+        )
+      )?.length > 0;
+
+    return { id, nickName, hasRoom: findRoom };
   });
 
   return parsed;

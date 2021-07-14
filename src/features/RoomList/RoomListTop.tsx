@@ -8,11 +8,11 @@ import {
 import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import colors from "@constants/colors";
-import { chatAPI } from "@api/api.sample";
+import { chatAPI, friendAPI } from "@api/api.sample";
 import dummyData from "@data/data.sample";
 import { IFriend } from "@types/roomList";
 
-import { roomListParser } from "./RoomParser";
+import { roomListParser, friendDataParser, roomDataParser } from "./RoomParser";
 import { roomAction, roomSelector } from "./RoomSlice";
 
 import { SearchInput } from "@components/input";
@@ -50,17 +50,54 @@ export function RoomListTop(): ReactElement {
     getSearchChatData(searchValue);
   }, [searchValue, getSearchChatData]);
 
+  const getRoomListData = useCallback(async () => {
+    const chatDataAPI = await chatAPI.getChatData();
+    const friendDataAPI = await friendAPI.getFriendData();
+    if (chatDataAPI && friendDataAPI) {
+      const pasedChatData = roomListParser(dummyData.authUser.id, chatDataAPI);
+      const pasedFriendData = friendDataParser(friendDataAPI, chatDataAPI);
+
+      dispatch(
+        roomAction.setRoomListData({
+          chat: pasedChatData,
+          friend: pasedFriendData,
+        })
+      );
+    }
+  }, [dispatch]);
+
   // NOTI: 대화방 생성
-  const handleCreateRoom = () => {};
+  const handleCreateRoom = (friendId: string) => {
+    const newRoomId = chatAPI.addNewRoom(friendId);
+    if (newRoomId) {
+      const roomDataAPI = chatAPI.getRoomData(newRoomId);
+      getRoomListData();
+
+      if (roomDataAPI) {
+        const pasedRoomData = roomDataParser(
+          dummyData.authUser.id,
+          roomDataAPI
+        );
+
+        dispatch(roomAction.setCurrentRoomData({ room: pasedRoomData }));
+      }
+    }
+    setShowFriendList(false);
+  };
 
   const friendSelectList =
     friendList.length > 0 ? (
       <Fragment>
         {friendList.map((friend: IFriend) => {
           return (
-            <span key={friend.id} onClick={() => {}}>
+            <button
+              type="button"
+              key={friend.id}
+              disabled={friend.hasRoom}
+              onClick={() => handleCreateRoom(friend.id)}
+            >
               {friend.nickName}
-            </span>
+            </button>
           );
         })}
       </Fragment>
@@ -80,9 +117,7 @@ export function RoomListTop(): ReactElement {
           >
             + 새로운 메세지
           </Button>
-          {/* {showFriendList && ( */}
-          <div>{friendSelectList}</div>
-          {/* )} */}
+          {showFriendList && <div>{friendSelectList}</div>}
         </CreateSelecteGroup>
       </TopWrapStyle>
 
@@ -132,11 +167,13 @@ const CreateSelecteGroup = styled.div`
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
     background: ${colors.white};
     box-sizing: border-box;
-    > span {
+    > button {
       display: block;
+      width: 100%;
       padding: 10px 0;
       text-align: center;
-      &:hover {
+      cursor: default;
+      &:hover:enabled {
         cursor: pointer;
         background: ${colors.lightPurple};
       }

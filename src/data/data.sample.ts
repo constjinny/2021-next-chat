@@ -13,9 +13,10 @@ const authUser = {
 };
 
 const friends = [
-  { id: "user1", nick_name: "최예슬", avatar_url: avatar2 },
-  { id: "user2", nick_name: "김펀치", avatar_url: "" },
-  { id: "user3", nick_name: "이윤호", avatar_url: "" },
+  { id: "friend1", nick_name: "최예슬", avatar_url: avatar2 },
+  { id: "friend2", nick_name: "김펀치", avatar_url: "" },
+  { id: "friend3", nick_name: "이윤호", avatar_url: avatar3 },
+  { id: "friend4", nick_name: "박승훈", avatar_url: "" },
 ];
 
 const chat = [
@@ -30,7 +31,7 @@ const chat = [
     room_members: [
       { id: "roket", last_visit_time: LAST_VISIT },
       {
-        id: "user1",
+        id: "friend1",
         last_visit_time: dayjs(LAST_VISIT).add(7250, "second").valueOf(),
       },
     ],
@@ -46,7 +47,7 @@ const chat = [
       },
       {
         user: {
-          id: "user1",
+          id: "friend1",
           nick_name: "최예슬",
           avatar_url: avatar2,
         },
@@ -60,23 +61,23 @@ const chat = [
     room_id: "chatRoom4233",
     room_info: {
       name: "Shin Ye-Ji",
-      img: avatar3,
+      img: "",
       job: "웹앱 UX 디자이너",
       is_friend: false,
     },
     room_members: [
       { id: "roket", last_visit_time: null },
       {
-        id: "user4",
+        id: "user1",
         last_visit_time: dayjs(LAST_VISIT).add(7250, "second").valueOf(),
       },
     ],
     chat_list: [
       {
         user: {
-          id: "user5",
+          id: "user1",
           nick_name: "Shin Ye-Ji",
-          avatar_url: avatar3,
+          avatar_url: "",
         },
         data: "안녕하세요 서류지원 합격한 신예지입니다.",
         time: dayjs(LAST_VISIT).subtract(20, "hour").valueOf(),
@@ -90,7 +91,7 @@ const chat = [
       name: "김펀치",
       img: "",
       job: "웹앱 UX 디자이너",
-      is_friend: false,
+      is_friend: true,
     },
     room_members: [
       {
@@ -98,7 +99,7 @@ const chat = [
         last_visit_time: dayjs(LAST_VISIT).subtract(80, "hour").valueOf(),
       },
       {
-        id: "user4",
+        id: "friend2",
         last_visit_time: null,
       },
     ],
@@ -128,8 +129,8 @@ const chat = [
     room_id: "chatRoom4343545222",
     room_info: {
       name: "이윤호",
-      img: "",
-      job: "웹앱 UX 디자이너",
+      img: avatar3,
+      job: "웹 프론트 엔지니어",
       is_friend: true,
     },
     room_members: [
@@ -138,7 +139,7 @@ const chat = [
         last_visit_time: dayjs(LAST_VISIT).subtract(200, "hour").valueOf(),
       },
       {
-        id: "user3",
+        id: "friend3",
         last_visit_time: dayjs(LAST_VISIT).add(7250, "second").valueOf(),
       },
     ],
@@ -154,18 +155,18 @@ const chat = [
       },
       {
         user: {
-          id: "user3",
+          id: "friend3",
           nick_name: "이윤호",
-          avatar_url: avatar2,
+          avatar_url: avatar3,
         },
         data: "요즘 뭐하고 지내.",
         time: dayjs(LAST_VISIT).subtract(121, "hour").valueOf(),
       },
       {
         user: {
-          id: "user3",
+          id: "friend3",
           nick_name: "이윤호",
-          avatar_url: avatar2,
+          avatar_url: avatar3,
         },
         data: "나도 이제 곧 포폴 준비해야 하는데 나중에 완성되면 한번 봐줘",
         time: dayjs(LAST_VISIT).subtract(120, "hour").valueOf(),

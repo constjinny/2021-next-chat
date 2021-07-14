@@ -23,7 +23,7 @@ export function RoomListPage(): ReactElement {
     const friendDataAPI = await friendAPI.getFriendData();
     if (chatDataAPI && friendDataAPI) {
       const pasedChatData = roomListParser(dummyData.authUser.id, chatDataAPI);
-      const pasedFriendData = friendDataParser(friendDataAPI);
+      const pasedFriendData = friendDataParser(friendDataAPI, chatDataAPI);
 
       dispatch(
         roomAction.setRoomListData({

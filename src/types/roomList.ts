@@ -8,6 +8,7 @@ export interface IRoomImg {
 export interface IFriend {
   id: string;
   nickName: string;
+  hasRoom?: boolean;
 }
 
 export interface IRoomList {
