@@ -3,7 +3,7 @@ import * as Redux from "react-redux";
 import styled from "@emotion/styled";
 import colors from "@constants/colors";
 
-import { roomSelector } from "@features/RoomList";
+import { roomSelector } from "@features/nameChange";
 import { Tag } from "@components/tag";
 
 export function RoomTop(): ReactElement {

@@ -13,7 +13,7 @@ import {
   roomSelector,
   roomListParser,
   roomDataParser,
-} from "@features/RoomList";
+} from "@features/nameChange";
 import { NoData } from "@components/noData";
 
 export function RoomPage(): ReactElement {

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import colors from "@constants/colors";
 import { IRoomChatItem } from "@type/room";
 
-import { roomSelector } from "@features/RoomList";
+import { roomSelector } from "@features/nameChange";
 import { Avatar } from "@components/avatar";
 
 export function ChatList(): ReactElement {

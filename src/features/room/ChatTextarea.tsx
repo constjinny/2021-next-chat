@@ -8,7 +8,7 @@ import {
   roomSelector,
   roomListParser,
   roomDataParser,
-} from "@features/RoomList";
+} from "@features/nameChange";
 import { Textarea } from "@components/input";
 
 export function ChatTextarea(): ReactElement {

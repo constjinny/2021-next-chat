@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { chatAPI, friendAPI } from "@api/api.sample";
 import dummyData from "@data/data.sample"; // TODO: 제거
 
-import { RoomList } from "./RoomList";
+import { RoomList } from "./nameChange";
 import { RoomListTop } from "./RoomListTop";
 import { roomListParser, friendDataParser } from "./RoomParser";
 import { roomAction, roomSelector } from "./RoomSlice";
