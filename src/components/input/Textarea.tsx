@@ -1,6 +1,7 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useCallback } from "react";
 import styled from "@emotion/styled";
 import colors from "@constants/colors";
+import { debounce } from "lodash";
 
 import { Button } from "@components/button";
 
@@ -17,14 +18,15 @@ export function Textarea({
   onChange,
   onSubmit,
 }: ITextareaProps): ReactElement {
-  const handleEnterKeyDown = (
-    event: React.KeyboardEvent<HTMLTextAreaElement>
-  ) => {
-    if (event.code === "Enter" && event.key === "Enter") {
-      onSubmit();
-    }
-    return false;
-  };
+  const handleEnterKeyDown = debounce(
+    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.code === "Enter" && event.key === "Enter") {
+        onSubmit();
+      }
+      return false;
+    },
+    200
+  );
 
   return (
     <BoxStyle>
@@ -33,7 +35,7 @@ export function Textarea({
           value={value}
           placeholder={placeholder}
           onChange={(event) => onChange(event.target.value)}
-          onKeyUp={(event) => handleEnterKeyDown(event)}
+          onKeyDown={(event) => handleEnterKeyDown(event)}
         />
       </TextareaBoxStyle>
       <ButtonBoxStyle>
