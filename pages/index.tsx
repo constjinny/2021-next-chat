@@ -11,7 +11,7 @@ import { Button } from "@components/button";
 
 export default function ChatApp(props: any) {
   const { push } = useRouter();
-  const { fullback } = props;
+  const { fallBack } = props;
   const [isLogin, setIsLogin] = useState(false);
 
   const checkLogin = useCallback(() => {
@@ -77,7 +77,7 @@ export default function ChatApp(props: any) {
       <h1>앱 홈</h1>
 
       <ChatAppLayout>
-        {fullback ? (
+        {fallBack ? (
           isLogin && (
             <Fragment>
               <h2>대화 목록</h2>
@@ -105,7 +105,7 @@ export default function ChatApp(props: any) {
 
 export async function getStaticProps() {
   return {
-    props: { fullback: true },
+    props: { fallBack: true },
   };
 }
 

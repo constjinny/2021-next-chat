@@ -9,7 +9,7 @@ import { Button, ButtonSizes } from "@components/button";
 
 export default function ChatApp(props: any) {
   const { push } = useRouter();
-  const { fullback } = props;
+  const { fallBack } = props;
   const [idValue, setIdValue] = useState<any>("");
   const [pwValue, setPwValue] = useState<any>("");
   const onLoginButton = idValue !== "" && pwValue !== "";
@@ -48,7 +48,7 @@ export default function ChatApp(props: any) {
 
       <LoginLayout>
         <div>
-          {fullback ? (
+          {fallBack ? (
             <Fragment>
               <p>
                 임시용 입니다. <br />
@@ -88,7 +88,7 @@ export default function ChatApp(props: any) {
 
 export async function getStaticProps() {
   return {
-    props: { fullback: true },
+    props: { fallBack: true },
   };
 }
 
